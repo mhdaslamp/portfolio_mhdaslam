@@ -46,7 +46,7 @@
               <div class="profile_pic">
                 <img
                   style="object-fit: cover; height: 100%; width: 100%"
-                  src="assets/profile.png"
+                  src="assets/profil.png"
                   alt=""
                 />
               </div>
@@ -131,7 +131,7 @@
         </div>
         <div class="project_about_main">
           <div class="project_section">
-            <h1>project</h1>
+            <h1 style="margin-left: 10px">Project</h1>
 
             <div class="project1">
               <div class="project_name"><h2>Bus Buddy</h2></div>
@@ -161,15 +161,6 @@
                 <a href="http://google.com">Demo</a>
               </div>
             </div>
-
-            <div class="project1">
-              <div class="project_name"><h1>hhh</h1></div>
-              <div class="project_decription"><h2>Bus Buddy</h2></div>
-              <div class="source">
-                <a href="http://google.com">Source</a>
-                <a href="http://google.com">Demo</a>
-              </div>
-            </div>
           </div>
 
           <div class="about_section">
@@ -182,9 +173,8 @@
                 solutions. <br />
                 Beyond academics, I actively participate in tech communities,
                 currently serving as the Lead of μLearn at GEC Palakkad, and
-                contributing to various student initiatives. When I’m not
-                coding, you’ll find me exploring design and finding creative
-                ways to communicate ideas visually.
+                contributing to various student initiatives. I enjoy exploring
+                design and visual storytelling.
               </p>
             </div>
             <div class="service_section">
@@ -212,13 +202,12 @@
           </div>
           <div class="works_buttons">
             <button type="button"><p>Web Development</p></button>
-            <button type="button"><p>Graphic Designing</p></button>
+            <button type="button" onclick="loadImages()">
+              <p>Graphic Designing</p>
+            </button>
           </div>
           <div class="works">
-            <div class="works_section1">
-              <img src="assets/works.png" alt="" />
-              <img src="assets/works.png" alt="" />
-            </div>
+            <div class="works_section1" id="dynamic_works"></div>
           </div>
         </div>
 
@@ -350,5 +339,6 @@
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
