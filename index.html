@@ -201,12 +201,19 @@
             <h1>Featured works</h1>
           </div>
           <div class="works_buttons">
-            <button type="button"><p>Web Development</p></button>
-            <button type="button" onclick="loadImages()">
+            <button
+              id="webBtn"
+              class="active"
+              onclick="loadImages('web', this)"
+            >
+              <p>Web Development</p>
+            </button>
+            <button id="graphicBtn" onclick="loadImages('graphic', this)">
               <p>Graphic Designing</p>
             </button>
           </div>
-          <div class="works">
+          <div class="works" id="works_div">
+            <div class="loader" id="loader"></div>
             <div class="works_section1" id="dynamic_works"></div>
           </div>
         </div>
