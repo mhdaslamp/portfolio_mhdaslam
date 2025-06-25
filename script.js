@@ -82,9 +82,9 @@ function loadContent(type, button) {
   });
 }
 
+const mouseBlob = document.getElementById('mouseBlob');
 
-document.addEventListener('mousemove', (e) => {
-  const sphere = document.getElementById('sphere1');
-  sphere.style.left = `${e.clientX - 200}px`;
-  sphere.style.top = `${e.clientY - 200}px`;
-});
+    document.addEventListener('mousemove', (e) => {
+      mouseBlob.style.left = `${e.clientX - 0}px`;
+      mouseBlob.style.top = `${e.clientY -0}px`;
+    });
