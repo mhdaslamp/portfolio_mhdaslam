@@ -56,6 +56,9 @@ h2 {
   justify-content: center;
   justify-items: center;
   height: auto;
+  position: relative; /* This creates a stacking context */
+
+  z-index: -1;
   width: 100%;
   background-color: rgb(0, 0, 0);
   padding-top: 100px;
@@ -820,8 +823,25 @@ a:hover {
   mix-blend-mode: screen;
   z-index: 0;
 }
+<<<<<<< HEAD
 .blur-gradient {
   animation: float 50s ease-in-out infinite alternate;
+=======
+
+.mouseBlob {
+  width: 333px;
+  height: 321px;
+  position: fixed; /* Changed from absolute to fixed for better floating effect */
+
+  border-radius: 433px;
+  background: #9442ff;
+  filter: blur(150px);
+  pointer-events: none;
+}
+
+.blur-gradient {
+  animation: float 90s ease-in-out infinite alternate;
+>>>>>>> 62393e8b527fee519b1fbfc3f6c3418091085dd1
 }
 
 @keyframes float {
