@@ -96,18 +96,16 @@ h2 {
   padding: 0;
   gap: 10px;
   border-radius: 12.977px;
-  background-color: rgb(0, 0, 0);
 }
 
 .hireme_section {
-  background-color: rgb(255, 2, 2);
   display: flex;
   flex-direction: column;
   padding: 10px 10px 10px 10px;
   border-radius: 12.977px;
   margin-bottom: 20px;
   padding-bottom: 16px;
-  background: #1e1b1e;
+  background-color: rgba(30, 27, 30, 0.5);
 }
 
 h1 {
@@ -119,7 +117,6 @@ h1 {
   margin: 0;
 }
 .first-text {
-  background-color: rgba(30, 27, 30, 0.5);
   width: 100%;
 }
 .Technology {
@@ -486,6 +483,32 @@ h1 {
 .mail {
   margin-bottom: 30px;
 }
+
+a:hover {
+  background-color: rgb(0, 42, 15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  border-radius: 50px;
+}
+
+/* Click (active) effect */
+svg {
+  transition: transform 0.3s ease, fill 0.3s ease;
+  color: #333;
+}
+
+svg:hover {
+  transform: scale(1.2) rotate(10deg);
+  color: #ff5733; /* Changes the fill if using currentColor */
+}
+
+a:hover {
+  background-color: rgb(0, 42, 15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  border-radius: 50px;
+}
+
 /*for samll tablets*/
 
 @media screen and (min-width: 600px) {
@@ -658,8 +681,6 @@ h1 {
   }
   .profile_image_main {
     height: 100%;
-
-    background-color: rgb(0, 0, 0);
   }
   h1 {
     font-size: 2rem;
@@ -785,4 +806,47 @@ h1 {
   66% {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
+}
+
+.blur-gradient {
+  width: 433px;
+  height: 421px;
+  position: fixed; /* Changed from absolute to fixed for better floating effect */
+
+  border-radius: 433px;
+  background: #9442ff;
+  filter: blur(150px);
+  position: fixed;
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+.blur-gradient {
+  animation: float 50s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(50vw, -30vh);
+  }
+  50% {
+    transform: translate(-40vw, 40vh);
+  }
+  75% {
+    transform: translate(60vw, 70vh);
+  }
+  100% {
+    transform: translate(-30vw, -60vh);
+  }
+}
+
+.main-center-container,
+.top-rectangle-section,
+.project_about_main,
+.featured_works_main,
+.contact_main {
+  position: relative;
+  z-index: 2; /* Higher than the blur gradient */
 }

@@ -22,9 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadContent(type, button) {
   // Image arrays
   const webImages = [
-    "https://i.postimg.cc/cCcSRsrd/coming-soon-2.png",
-    "https://i.postimg.cc/x8QQNkjs/frame-size-1.png",
-    "https://i.postimg.cc/52rMqKNQ/Group-12.png",
+   "https://i.postimg.cc/QCDWZxtP/Screenshot-2025-06-27-174941.png"
   ];
 
   const graphicImages = [
@@ -88,3 +86,5 @@ document.addEventListener('mousemove', (e) => {
   sphere.style.left = `${e.clientX - 200}px`;
   sphere.style.top = `${e.clientY - 200}px`;
 });
+
+
