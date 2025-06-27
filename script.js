@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize with web development as default
   const webBtn = document.getElementById('webBtn');
@@ -17,25 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
   graphicBtn.addEventListener('click', function() {
     loadContent('graphic', this);
   });
-
-  // Optional: define loadContent function if not defined elsewhere
-  function loadContent(type, activeButton) {
-    // Remove 'active' class from both buttons
-    webBtn.classList.remove('active');
-    graphicBtn.classList.remove('active');
-
-    // Add 'active' class to the clicked button
-    activeButton.classList.add('active');
-
-    // Toggle content visibility
-    document.getElementById('webContent').style.display = (type === 'web') ? 'flex' : 'none';
-    document.getElementById('graphicContent').style.display = (type === 'graphic') ? 'flex' : 'none';
-  }
 });
 
-
-
-function loadImages(type, buttonElement) {
+function loadContent(type, button) {
+  // Image arrays
   const webImages = [
    "https://i.postimg.cc/QCDWZxtP/Screenshot-2025-06-27-174941.png"
   ];
@@ -49,59 +36,57 @@ function loadImages(type, buttonElement) {
     "https://i.postimg.cc/C1Jb7jgZ/playstation-1.png"
   ];
 
+  // Get elements
   const container = document.getElementById("dynamic_works");
   const loader = document.getElementById("loader");
+  const allButtons = document.querySelectorAll('.works_buttons button');
 
-  // Clear container and show loader
-  container.innerHTML = "";
-  loader.style.display = "block";
+  // Clear and show loader
+  container.innerHTML = '';
+  loader.style.display = 'block';
 
   // Update button states
-  document.querySelectorAll('.works_buttons button').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  buttonElement.classList.add('active');
+  allButtons.forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
 
   // Load appropriate images
   const images = type === 'web' ? webImages : graphicImages;
   
-  // Track loaded images
-  let loadedCount = 0;
-  const totalImages = images.length;
-
+  // Create image elements
   images.forEach(src => {
-    const img = new Image();
+    const img = document.createElement('img');
     img.src = src;
-    img.alt = "Portfolio Image";
-    img.style.width = "311px";
-    img.style.height = "311px";
-    img.style.borderRadius = "37px";
-    img.style.objectFit = "cover";
-    img.style.margin = "5px";
-
-    img.onload = function() {
+    img.alt = "Portfolio work";
+    img.style.cssText = `
+      width: 311px;
+      height: 311px;
+      border-radius: 37px;
+      object-fit: cover;
+      margin: 5px;
+    `;
+    
+    img.onload = () => {
       container.appendChild(img);
-      loadedCount++;
-      if (loadedCount === totalImages) {
-        loader.style.display = "none";
+      // Hide loader when all images are loaded
+      if (container.children.length === images.length) {
+        loader.style.display = 'none';
       }
     };
-
-    img.onerror = function() {
-      console.error("Failed to load image:", src);
-      loadedCount++;
-      if (loadedCount === totalImages) {
-        loader.style.display = "none";
+    
+    img.onerror = () => {
+      console.error('Failed to load image:', src);
+      if (container.children.length === images.length - 1) {
+        loader.style.display = 'none';
       }
     };
   });
 }
 
-// Initialize on page load
-window.onload = function() {
-  const webBtn = document.getElementById('webBtn');
-  // Set web button as active by default
-  webBtn.classList.add('active');
-  // Load web images by default
-  loadImages('web', webBtn);
-};
+
+document.addEventListener('mousemove', (e) => {
+  const sphere = document.getElementById('sphere1');
+  sphere.style.left = `${e.clientX - 200}px`;
+  sphere.style.top = `${e.clientY - 200}px`;
+});
+
+
