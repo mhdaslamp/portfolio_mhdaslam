@@ -1,22 +1,22 @@
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Initialize with web development as default
   const webBtn = document.getElementById('webBtn');
   const graphicBtn = document.getElementById('graphicBtn');
-  
+
   // Set initial active state
   webBtn.classList.add('active');
-  
+
   // Load initial content
   loadContent('web', webBtn);
 
   // Add click handlers
-  webBtn.addEventListener('click', function() {
+  webBtn.addEventListener('click', function () {
     loadContent('web', this);
   });
-  
-  graphicBtn.addEventListener('click', function() {
+
+  graphicBtn.addEventListener('click', function () {
     loadContent('graphic', this);
   });
 });
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadContent(type, button) {
   // Image arrays
   const webImages = [
-   "https://i.postimg.cc/QCDWZxtP/Screenshot-2025-06-27-174941.png"
+    "https://i.postimg.cc/QCDWZxtP/Screenshot-2025-06-27-174941.png"
   ];
 
   const graphicImages = [
@@ -36,10 +36,13 @@ function loadContent(type, button) {
     "https://i.postimg.cc/C1Jb7jgZ/playstation-1.png"
   ];
 
-  // Get elements
   const container = document.getElementById("dynamic_works");
   const loader = document.getElementById("loader");
   const allButtons = document.querySelectorAll('.works_buttons button');
+
+  // Mark start time to ensure minimum lodaer visibility
+  const startTime = Date.now();
+  const minDuration = 600; // ms
 
   // Clear and show loader
   container.innerHTML = '';
@@ -49,38 +52,51 @@ function loadContent(type, button) {
   allButtons.forEach(btn => btn.classList.remove('active'));
   button.classList.add('active');
 
-  // Load appropriate images
   const images = type === 'web' ? webImages : graphicImages;
-  
-  // Create image elements
+  let loadedCount = 0;
+
+  if (images.length === 0) {
+    loader.style.display = 'none';
+    return;
+  }
+
   images.forEach(src => {
     const img = document.createElement('img');
     img.src = src;
     img.alt = "Portfolio work";
+    img.className = 'portfolio-img'; // Use class for styling
     img.style.cssText = `
       width: 311px;
       height: 311px;
       border-radius: 37px;
       object-fit: cover;
       margin: 5px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     `;
-    
+
     img.onload = () => {
+      loadedCount++;
       container.appendChild(img);
-      // Hide loader when all images are loaded
-      if (container.children.length === images.length) {
-        loader.style.display = 'none';
+      setTimeout(() => img.style.opacity = '1', 50); // Fade in effect
+
+      if (loadedCount === images.length) {
+        const remainingTime = Math.max(0, minDuration - (Date.now() - startTime));
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, remainingTime);
       }
     };
-    
+
     img.onerror = () => {
-      console.error('Failed to load image:', src);
-      if (container.children.length === images.length - 1) {
+      loadedCount++;
+      if (loadedCount === images.length) {
         loader.style.display = 'none';
       }
     };
   });
 }
+
 
 
 document.addEventListener('mousemove', (e) => {
