@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadContent(type, button) {
   // Image arrays
   const webImages = [
-    "https://i.postimg.cc/QCDWZxtP/Screenshot-2025-06-27-174941.png"
+    { url: "https://i.postimg.cc/QCDWZxtP/Screenshot-2025-06-27-174941.png", link: "https://mhdaslam.me/" },
+    { url: "https://i.postimg.cc/PqCY15gN/Screenshot-2026-03-31-185902.png", link: "https://alameencatering.in/" }
   ];
 
   const graphicImages = [
@@ -60,25 +61,36 @@ function loadContent(type, button) {
     return;
   }
 
-  images.forEach(src => {
+  images.forEach(item => {
+    const isObj = typeof item === 'object';
+    const src = isObj ? item.url : item;
+    const link = isObj ? item.link : null;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'work-item';
+    wrapper.style.opacity = '0';
+    wrapper.style.transition = 'opacity 0.5s ease';
+
     const img = document.createElement('img');
     img.src = src;
     img.alt = "Portfolio work";
-    img.className = 'portfolio-img'; // Use class for styling
-    img.style.cssText = `
-      width: 311px;
-      height: 311px;
-      border-radius: 37px;
-      object-fit: cover;
-      margin: 5px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    `;
+    img.className = 'portfolio-img';
+
+    if (link) {
+      const overlay = document.createElement('a');
+      overlay.href = link;
+      overlay.target = "_blank";
+      overlay.className = 'visit-overlay';
+      overlay.textContent = 'Visit';
+      wrapper.appendChild(overlay);
+    }
+
+    wrapper.appendChild(img);
 
     img.onload = () => {
       loadedCount++;
-      container.appendChild(img);
-      setTimeout(() => img.style.opacity = '1', 50); // Fade in effect
+      container.appendChild(wrapper);
+      setTimeout(() => wrapper.style.opacity = '1', 50); // Fade in effect
 
       if (loadedCount === images.length) {
         const remainingTime = Math.max(0, minDuration - (Date.now() - startTime));
